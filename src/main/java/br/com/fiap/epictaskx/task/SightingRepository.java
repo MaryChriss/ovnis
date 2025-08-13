@@ -2,5 +2,5 @@ package br.com.fiap.epictaskx.task;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TaskRepository extends JpaRepository<Task, Long> {
+public interface SightingRepository extends JpaRepository<Sighting, Long> {
 }

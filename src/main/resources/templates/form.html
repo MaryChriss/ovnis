@@ -1,49 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dracula">
+<html lang="en" data-theme="dracula" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     <meta charset="UTF-8">
-    <title>EpicTask</title>
+    <title>Novo UFO Sighting</title>
 </head>
 <body>
 
-<h1 class="text-primary text-2xl font-bold">EpicTask</h1>
+<h1 class="text-primary text-2xl font-bold p-4">Novo UFO Sighting</h1>
 
 <main class="grid place-items-center">
-   <form class="w-full max-w-md" method="POST">
-       <fieldset class="fieldset">
-           <legend class="fieldset-legend">Título</legend>
-           <input name="title" type="text" class="input" placeholder="título da tarefa" />
-           <p class="label">Campo obrigatório</p>
-       </fieldset>
+    <!-- Ajusta action para seu endpoint POST correto -->
+    <form class="w-full max-w-md" method="POST" th:action="@{/task/form}">
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Localização</legend>
+            <input name="location" type="text" class="input" placeholder="Digite a localização" required />
+        </fieldset>
 
-       <fieldset class="fieldset">
-           <legend class="fieldset-legend">Descrição</legend>
-           <textarea name="description" class="textarea" placeholder="descrição da tarefa"></textarea>
-           <p class="label">Pelo menos 10 caracteres</p>
-       </fieldset>
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Data e Hora</legend>
+            <input name="dateAndTime" type="datetime-local" class="input" required />
+        </fieldset>
 
-       <fieldset class="fieldset">
-           <legend class="fieldset-legend">Pontos</legend>
-           <input name="score" id="range-score" type="range" min="0" max="100" value="40" class="range range-primary" />
-           <p id="label-score" class="label">40 pts</p>
-       </fieldset>
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Cor</legend>
+            <input name="color" type="text" class="input" placeholder="Ex: Vermelho" required />
+        </fieldset>
 
-       <div>
-           <a href="/task" class="btn btn-neutral">Cancelar</a>
-           <button class="btn btn-primary">Salvar</button>
-       </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Forma</legend>
+            <select name="shape" class="select" required>
+                <option value="">Selecione</option>
+                <option value="Disc">Disco</option>
+                <option value="Sphere">Esfera</option>
+                <option value="Triangle">Triângulo</option>
+                <option value="Other">Outro</option>
+            </select>
+        </fieldset>
 
-   </form>
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Quantidade de Objetos</legend>
+            <input name="quantity" type="number" class="input" min="1" required />
+        </fieldset>
+
+        <div class="mt-4 flex gap-2">
+            <a href="/task" class="btn btn-neutral">Cancelar</a>
+            <button class="btn btn-primary">Salvar</button>
+        </div>
+    </form>
 </main>
-
-<script>
-    document.querySelector("#range-score").addEventListener("input", (e) => {
-        document.querySelector("#label-score").textContent = e.target.value + " pts";
-    })
-</script>
 
 </body>
 </html>
